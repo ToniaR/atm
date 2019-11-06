@@ -1,32 +1,21 @@
 <template>
   <div id="app">
+      <div>balance</div>
+      {{ checkedNotes }}
+
       <h1>Withdraw cash easily!</h1>
       <div class="form">
         <input type="text" id="amount" name="amount" v-model="entryAmount">
-        <div class="form__checkboxes">
-          <span class="form-field">
-            <label for="hungreed">100</label>
-            <input type="checkbox" value="100" id="hungreed">
-          </span>
-        </div>
-        <div>
-          <span class="form-field">
-            <label for="fifty">50</label>
-            <input type="checkbox" value="50" id="fifty">
-          </span>
-        </div>
-        <div>
-          <span class="form-field">
-            <label for="twenty">20</label>
-            <input type="checkbox" value="20" id="twenty">
-          </span>
-        </div>
-        <div>
-          <span class="form-field">
-            <label for="ten">10</label>
-            <input type="checkbox" value="10" id="ten">
-          </span>
-        </div>
+        <ul class="form__checkboxes">
+          <li v-for="(note, key) in notes" :key="key">
+              <span class="form-field">
+                <label :for="note.id">{{ note.amount }}</label>
+                <input type="checkbox" :id="note.id" v-model="checkedNotes" :value="note.amount">
+              </span>
+          </li>
+        </ul>
+
+
       </div>
       <button @click="getNotes">Withdraw</button>
 
@@ -40,15 +29,19 @@ export default {
   data() {
     return {
       entryAmount: null,
-      notes: [100, 50, 20, 10],
-      choosenNotes: [],
-      result: []
+      availNotes: [100, 50, 20, 10],
+      checkedNotes: [],
+      result: [],
+      notes: [
+        { id: 1, amount: 100 },
+        { id: 2, amount: 50 },
+        { id: 3, amount: 20 },
+        { id: 4, amount: 10 }
+      ]
+      
     }
   },
   watch: {
-    // entryAmount: function(value) {
-    //   value !== null ? this.getResult(value) : console.log('wprowadź wartość');
-    // } 
   },
   methods: {
     getResult(amount) {
@@ -62,11 +55,11 @@ export default {
     getNotes() {
       this.result = [];
       if(this.entryAmount % 10 === 0) {
-        if(this.choosenNotes) {
-          this.calculate(this.entryAmount, this.choosenNotes);          
+        if(this.checkedNotes) {
+          this.calculate(this.entryAmount, this.checkedNotes);          
         }
         else {
-          this.calculate(this.entryAmount, this.notes);
+          this.calculate(this.entryAmount, this.availNotes);
         }
       }
       else {
@@ -77,31 +70,18 @@ export default {
       let remainder = null, count = null; 
       this.result = [];
       if(amount > 0 ) {
-        console.log('r', this.result)
-        console.log(1, amount);
         for(let i = 0; i < arr.length; i++) {
           if(amount >= arr[i]) {
-            console.log(2 + ' arr[i]', arr[i]);
             // this.result= this.amount % arr[i]; // 
             let division = amount / arr[i];
-            console.log(3 + ' division', division);
-
             count = Math.floor(division); // how much note we should add
-            console.log(4 + ' count', count);
             remainder = amount % arr[i]; // the remainder from the division
-            console.log(5 + ' reminder', remainder);
 
             this.addNotes(arr[i], count); // add notes to result
             amount = remainder;
-            console.log(6 + ' amount', amount);
-          }
-          else {
-            console.log('GO ON!');
           }
         }
       }
-
-      console.log(7 + ' result ', this.result);
     },
     addNotes(note, noteNum) {
       if(noteNum > 1) {
@@ -120,6 +100,15 @@ export default {
         this.result = [];
       })
     }
+    // toggle() {
+    //   let checkList = document.querySelectorAll('li');
+    //   checkList.forEach(el => {
+    //     el.addEventListener('click', e => {
+    //       e.preventDefault();
+    //       console.log(e.target);
+    //     });
+    //   });
+    // }
   }
 }
 </script>
