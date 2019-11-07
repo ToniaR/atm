@@ -53,26 +53,22 @@ export default {
       }
     },
     getNotes() {
-      this.result = [];
-      if(this.entryAmount % 10 === 0) {
-        if(this.checkedNotes) {
-          this.calculate(this.entryAmount, this.checkedNotes);          
-        }
-        else {
-          this.calculate(this.entryAmount, this.availNotes);
-        }
+      this.result = []; 
+      if(this.checkedNotes.length > 0) {
+        console.log('a')
+        this.calculateWithNotes(this.entryAmount, this.checkedNotes);        
       }
       else {
-        this.result.push('NoteUnavailableException');
+        console.log('b')
+        this.calculate(this.entryAmount, this.availNotes);
       }
     },
     calculate(amount, arr) {
       let remainder = null, count = null; 
-      this.result = [];
+      // this.result = [];
       if(amount > 0 ) {
         for(let i = 0; i < arr.length; i++) {
           if(amount >= arr[i]) {
-            // this.result= this.amount % arr[i]; // 
             let division = amount / arr[i];
             count = Math.floor(division); // how much note we should add
             remainder = amount % arr[i]; // the remainder from the division
@@ -83,32 +79,37 @@ export default {
         }
       }
     },
-    addNotes(note, noteNum) {
-      if(noteNum > 1) {
-        for(let i = 0; i < noteNum; i++) {
-          this.result.push(note);
+    calculateWithNotes(amount, arr) {
+      this.result = [];
+      for(let i = 0; i < arr.length; i++) {
+        this.result.push(arr[i]);
+        if (i === arr.length - 1) {
+          let sum = this.result.reduce((a, b) => a + b);
+          if (amount > sum) {
+            let remainder = amount - sum;
+            this.calculate(remainder, this.availNotes);
+          }
         }
       }
-      else {
+    },
+    addNotes(note, noteNum) {
+      for(let i = 0; i < noteNum; i++) {
         this.result.push(note);
       }
-
     },
     clearResult() {
       let input = document.getElementById('amount');
       input.addEventListener('oninput', () => {
         this.result = [];
       })
+    },
+    sumResult(arr) {
+      let sum = 0;
+      for(let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+      }
+      return sum;
     }
-    // toggle() {
-    //   let checkList = document.querySelectorAll('li');
-    //   checkList.forEach(el => {
-    //     el.addEventListener('click', e => {
-    //       e.preventDefault();
-    //       console.log(e.target);
-    //     });
-    //   });
-    // }
   }
 }
 </script>
