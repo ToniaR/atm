@@ -6,10 +6,14 @@ describe('App.vue', () => {
     
     const app = mount(App, { vue })
 
+
     it('setup correctly', () => {
         expect(true).toBe(true);
     })
+    
     it('App has a .center-content class', () => {
         expect(app.classes()).toContain('center-content')
     })
+
+
 });
