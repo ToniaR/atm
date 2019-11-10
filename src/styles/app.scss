@@ -1,3 +1,7 @@
+@import './colors.scss';
+@import './mixins.scss';
+
+
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +11,156 @@ html, body {
     font-family: 'Raleway', sans-serif;   
 }
 
+body {
+    background: $bg-color;
+}
+
 #app {
+    position: relative;
     display: block;
     width: 50%;
     margin: 2em auto;
+}
+
+ul li {
+    list-style: none;
+}
+
+button {
+    outline: none;
+}
+
+#app {
+    max-width: 700px;
+    background: white;
+    padding: 4%;
+    border-radius: 11px;
+    box-shadow: 2px 2px 6px #ced3dc;
+}
+
+
+.app-form {
+    width: 100%;
+    @include flex-block(column, flex-start, flex-start);
+}
+
+.app-form__input-field {
+    width: 100%;
+    height: 2em;
+    margin: 1em 0;
+    border: none;
+    outline: none;
+    background: $input-background;
+    padding: 1% 2%;
+    box-sizing: border-box;
+    font-size: 1.3em;
+}
+
+.app-form__checkbox-list {
+    width: 100%;
+    margin: 1em 0;
+    @include flex-block(row, space-between, center);
+}
+
+.app-form__list-item {
+    width: 25%;
+    @include flex-block(row, space-around, center);
+}
+
+.app-form__checkbox {
+   position: relative;
+   top: -5px;
+
+   &:before {   
+    content: "";
+        position: absolute;
+        display: block;    
+        z-index: 1;
+        width: 15px;
+        height: 15px;
+        border: 2px solid $checkbox-border-color;
+        border-radius: 3px;
+        @include transition(all 0.3s ease-in-out);
+        cursor: pointer;
+   }
+   
+   &:after {
+    content: "";
+        position: absolute;
+        top: 0;
+        z-index: 0;
+        display: block;
+        width: 15px;
+        height: 15px;
+        background: $checkbox-bg;
+   }
+
+   &:checked:before {
+        border-top-style: none;
+        border-right-style: none;
+        height: 10px;
+        border-color: $checkbox-border-color;
+        border-radius: 0;
+        @include transform(rotate(-45deg));
+   }
+
+}
+ .form-field input[type='checkbox'] ~ label  {
+    color: $label-active-color;
+}
+
+.form-label {
+    height: auto;
+    line-height: 1em;
+    font-weight: 700;
+    margin-right: 1em;
+}
+
+.app-form__submit-btn {
+    position: relative;
+    left: 200px;
+    width: 10em;
+    height: 3em;
+    background: $submit-btn-bg;
+    color: $submit-btn-text;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.1);
+    font-size: 1em;
+    margin: 2em 0;
+    cursor: pointer;
+}
+
+.app__result-block {
+    width: 100%;
+    height: 5em;
+    margin: 2em 0 0;
+    background: $result-block-bg;
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+.app__result-title,
+.app__result-item{
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.app__result-title {
+    color: $label-active-color;
+}
+
+.app-form__error-block {
+    width: 100%;
+    height: 4em;
+    padding: 0 5%;
+    background-color: $error-bg;
+    border-radius: 3px;
+    line-height: 4em;
+    box-sizing: border-box;
+    color: $error-text;
+    font-size: 15px;
+    font-weight: bold;
 }

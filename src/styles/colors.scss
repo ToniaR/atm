@@ -1,0 +1,27 @@
+:root {
+    --white: #FCF7F8;
+    --grey: #CED3DC;
+    --violet: #503BED;
+    --gunPowder: #414361;
+    --ebonyClay: #2A2D43;
+    --lightGrey: rgba(206, 211, 220, 0.37);
+    --whiteLilac: #f2f5fa;
+    --red: #ec7878ab;
+}
+
+$bg-color: var(--white);
+
+$checkbox-bg: var(--white);
+$checkbox-border-color: var(--violet);
+
+$input-border-color: var(--grey);
+$input-background: var(--whiteLilac);
+
+$submit-btn-bg: var(--gunPowder);
+$submit-btn-text: var(--white);
+
+$label-active-color: var(--violet);
+$result-block-bg: var(--lightGrey);
+
+$error-bg: var(--red);
+$error-text: var(--white);

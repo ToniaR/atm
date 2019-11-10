@@ -38,12 +38,9 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         use: [{
             loader: 'file-loader',
-            options: {
-              publicPath: 'img',
-              useRelativePath: true
-            }
+            options: {}
         }]
-      },  
+      },    
       {
         test: /\.ttf$/,
         use: [
