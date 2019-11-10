@@ -1,8 +1,9 @@
 <template>
   <div id="app" class="center-content">
-      <h1>Withdraw cash easily!</h1>
+      <h1>Withdraw cash here!</h1>
       <div class="app-form">
-        <input type="text" id="amount" name="amount" v-model="entryAmount" class="app-form__input-field">
+        <input type="text" id="amount" name="amount" v-model="entryAmount" class="app-form__input-field"
+          placeholder="amount">
         <ul class="app-form__checkbox-list">
           <li v-for="(note, key) in notes" :key="key" class="app-form__list-item">
               <span class="form-field">
