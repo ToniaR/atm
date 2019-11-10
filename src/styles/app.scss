@@ -41,6 +41,8 @@ button {
 
 .app-form {
     width: 100%;
+    min-height: 15em;
+    position: relative;
     @include flex-block(column, flex-start, flex-start);
 }
 
@@ -117,8 +119,9 @@ button {
 }
 
 .app-form__submit-btn {
-    position: relative;
-    left: 200px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     width: 10em;
     height: 3em;
     background: $submit-btn-bg;

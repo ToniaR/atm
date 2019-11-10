@@ -114,12 +114,6 @@ export default {
         this.result.push(note);
       }
     },
-    clearResult() {
-      let input = document.getElementById('amount');
-      input.addEventListener('oninput', () => {
-        this.result = [];
-      })
-    },
     sumResult(arr) {
       let sum = 0;
       for(let i = 0; i < arr.length; i++) {
