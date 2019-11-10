@@ -44,7 +44,6 @@ export default {
   },
   watch:  {
     'entryAmount'(val) {
-      console.log('val ', val)
       if(this.entryAmount !== null) {
         this.result = [];
       }
